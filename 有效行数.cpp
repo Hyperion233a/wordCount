@@ -1,51 +1,25 @@
-#include<iostream>
-#include<cstdio>
-#include<string>
-#include<cstdlib>
+#include <stdio.h>
+#include<stdlib.h> 
 #include<fstream>
+#include<iostream>
 using namespace std;
-int line(){
-                 char buf1[1000];    //定义一个数组，用来存放字符
-
-//	
-//	FILE *fp;
-//	fp=fopen("test.txt","r");
-//	if(!fp)
-//	return -1;
-//fscanf(fp,"%s",buf1);
-ifstream ifile;               //定义输入文件
-	int i=0;
-    ifile.open("test.txt");
-	while(!ifile.eof()){    
-        buf1[i]=ifile.get();
-         i++;
-}
-int count=0;
-	ifile.close();
-	
-
-	char *buf=buf1;
-	while(*buf)
-	{    
-		if(*buf=='\n')
-		{   
-			buf++;
-			if(*buf){
-				 count++;
-				 continue;
-			}
-		
-			else break;	
-		}
-		
-		else buf++;
-		
-	}
-	return count;
+int lines()
+{
+    FILE * fp;
+    int num=0;
+    char buff[2550];
+    if((fp=fopen("test.txt","r"))==NULL)
+    {    printf("Can't open file\n");
+       return -1;
+    }
+    while (!feof(fp))
+    {    fgets(buff,2550,fp);
+       num++;
+    }
+    fclose(fp);
+    return num;
 }
 int main(){
-	
-	cout<<line();
-
+	cout<<lines();
 	return 0;
 }
